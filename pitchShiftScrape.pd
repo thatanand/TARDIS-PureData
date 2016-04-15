@@ -1,0 +1,69 @@
+#N canvas 960 22 960 1114 10;
+#X obj 75 73 inlet~;
+#X obj 272 461 outlet~;
+#X obj 269 222 phasor~;
+#X obj 269 260 *~ 100;
+#X obj 400 240 -~ 0.5;
+#X obj 400 274 /~ 2;
+#X obj 401 315 cos~;
+#X obj 270 332 *~;
+#X obj 143 343 *~ 100;
+#X obj 219 337 -~ 0.5;
+#X obj 219 364 /~ 2;
+#X obj 219 393 cos~;
+#X obj 143 410 *~;
+#X obj 272 427 *~ 1;
+#X obj 143 292 expr~ fmod($v1 \, 1);
+#X obj 143 239 +~ 0.5;
+#X text 327 220 Phasor used to vary delay;
+#X text 315 260 Scale by 100;
+#X text 222 70 FreqOut = FreqIn * (1-phasorFreq *(delayPeriod)/1000ms)
+;
+#X text 305 189 negative decreasing delay (increase pitch) \, positive
+increasing delay (decrease pitch);
+#X text 450 280 effectively making the pitch shifting smoother;
+#X text 451 302 phasor output level 0 - cosine output level 0;
+#X text 451 324 phasor output level 1 - cosine output level 1;
+#X text 450 344 cosine ramp fills in between the levels to make jump
+smoother;
+#X text -222 337 adding in and out of phase sounds \, phasing effect
+is almost completely gone;
+#X text -219 299 inverting the degree of phase by 180 degrees \, using
+delays;
+#X text -1 72 input signal;
+#X text -151 111 write to 2 delay lines;
+#X text 449 259 3 objects fix jumps due to phasor (cosine ramp);
+#X text 255 483 signal outlet;
+#X obj -13 110 delwrite~ coin1 100;
+#X obj 112 110 delwrite~ coin1 100;
+#X obj 313 114 inlet;
+#X floatatom 313 145 5 0 0 0 - - -;
+#X text 354 140 variable pitch shifting;
+#X obj 143 370 vd~ coin1;
+#X obj 269 287 vd~ coin1;
+#X text -81 12 PITCH SHIFTING (time rotar needs variable pitch shifting
+rather than static like engine start/stop sound - hence different abstraction)
+;
+#X connect 0 0 30 0;
+#X connect 0 0 31 0;
+#X connect 2 0 3 0;
+#X connect 2 0 4 0;
+#X connect 2 0 15 0;
+#X connect 3 0 36 0;
+#X connect 4 0 5 0;
+#X connect 5 0 6 0;
+#X connect 6 0 7 1;
+#X connect 7 0 13 0;
+#X connect 8 0 35 0;
+#X connect 9 0 10 0;
+#X connect 10 0 11 0;
+#X connect 11 0 12 1;
+#X connect 12 0 13 0;
+#X connect 13 0 1 0;
+#X connect 14 0 8 0;
+#X connect 14 0 9 0;
+#X connect 15 0 14 0;
+#X connect 32 0 33 0;
+#X connect 33 0 2 0;
+#X connect 35 0 12 0;
+#X connect 36 0 7 0;

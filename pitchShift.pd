@@ -1,0 +1,66 @@
+#N canvas 358 273 1117 721 10;
+#X obj 161 56 inlet~;
+#X obj 358 444 outlet~;
+#X obj 355 205 phasor~;
+#X obj 355 243 *~ 100;
+#X obj 486 223 -~ 0.5;
+#X obj 486 257 /~ 2;
+#X obj 487 298 cos~;
+#X obj 356 315 *~;
+#X obj 229 326 *~ 100;
+#X obj 305 320 -~ 0.5;
+#X obj 305 347 /~ 2;
+#X obj 305 376 cos~;
+#X obj 229 393 *~;
+#X obj 358 410 *~ 1;
+#X obj 229 275 expr~ fmod($v1 \, 1);
+#X obj 229 222 +~ 0.5;
+#X obj 198 93 delwrite~ hello 100;
+#X obj 91 93 delwrite~ hi 100;
+#X obj 229 353 vd~ hi;
+#X obj 355 270 vd~ hello;
+#X obj 355 151 loadbang;
+#X msg 355 181 4;
+#X text 413 203 Phasor used to vary delay;
+#X text 401 243 Scale by 100;
+#X text 308 53 FreqOut = FreqIn * (1-phasorFreq *(delayPeriod)/1000ms)
+;
+#X text 391 172 negative decreasing delay (increase pitch) \, positive
+increasing delay (decrease pitch);
+#X text 536 263 effectively making the pitch shifting smoother;
+#X text 537 285 phasor output level 0 - cosine output level 0;
+#X text 537 307 phasor output level 1 - cosine output level 1;
+#X text 536 327 cosine ramp fills in between the levels to make jump
+smoother;
+#X text -136 320 adding in and out of phase sounds \, phasing effect
+is almost completely gone;
+#X text -133 282 inverting the degree of phase by 180 degrees \, using
+delays;
+#X text 85 55 input signal;
+#X text -48 94 write to 2 delay lines;
+#X text 535 242 3 objects fix jumps due to phasor (cosine ramp);
+#X text 341 466 signal outlet;
+#X text 74 13 PITCH SHIFTING;
+#X connect 0 0 16 0;
+#X connect 0 0 17 0;
+#X connect 2 0 3 0;
+#X connect 2 0 4 0;
+#X connect 2 0 15 0;
+#X connect 3 0 19 0;
+#X connect 4 0 5 0;
+#X connect 5 0 6 0;
+#X connect 6 0 7 1;
+#X connect 7 0 13 0;
+#X connect 8 0 18 0;
+#X connect 9 0 10 0;
+#X connect 10 0 11 0;
+#X connect 11 0 12 1;
+#X connect 12 0 13 0;
+#X connect 13 0 1 0;
+#X connect 14 0 8 0;
+#X connect 14 0 9 0;
+#X connect 15 0 14 0;
+#X connect 18 0 12 0;
+#X connect 19 0 7 0;
+#X connect 20 0 21 0;
+#X connect 21 0 2 0;
